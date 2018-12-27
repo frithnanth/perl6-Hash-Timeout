@@ -1,3 +1,9 @@
+## Build Status
+
+| Operating System  |   Build Status  | CI Provider |
+| ----------------- | --------------- | ----------- |
+| Linux             | [![Build Status](https://travis-ci.org/frithnanth/perl6-Hash-Timeout.svg?branch=master)](https://travis-ci.org/frithnanth/perl6-Hash-Timeout)  | Travis CI |
+
 NAME
 ====
 
