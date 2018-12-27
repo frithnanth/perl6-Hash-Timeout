@@ -2,7 +2,7 @@ dist: trusty
 os: linux
 language: perl6
 perl6:
-  - '2018.11'
+  - '2018.12'
 install:
   - rakudobrew build zef
   - zef install --deps-only --/test .
