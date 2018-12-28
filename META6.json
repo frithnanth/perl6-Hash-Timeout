@@ -15,7 +15,7 @@
     "Hash::Timeout" : "lib/Hash/Timeout.pm6"
   },
   "resources" : [ ],
-  "source-url" : "",
+  "source-url" : "https://github.com/frithnanth/perl6-Hash-Timeout.git",
   "tags" : [
     "hash",
     "timeout"
