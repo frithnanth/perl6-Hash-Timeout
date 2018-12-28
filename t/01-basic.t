@@ -23,6 +23,11 @@ subtest {
   ok %h<a> == 13, 'can read a value';
   sleep 1;
   nok %h<a>:exists, 'value expires';
+  %h<b> = 2;
+  %h = Hash.new;
+  sleep 1;
+  ok %h.elems == 0, 'can delete a value before timeout';
+  lives-ok { %h = 'a' => 1 }, 'can store pairs';
 }, 'test timeout';
 
 done-testing;

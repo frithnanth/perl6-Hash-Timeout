@@ -13,7 +13,9 @@ role Hash::Timeout:ver<0.0.1>:auth<cpan:FRITH>[$timeout = 3600] does Hash::Agnos
       STORE => -> $, \v is raw { %!hash{$key} = v }
     );
   }
-  method EXISTS-KEY($key) { %!hash.{$key}.DEFINITE }
+  method EXISTS-KEY($key) {
+    %!hash.{$key}.DEFINITE
+  }
   method ASSIGN-KEY(\key, \value) {
     .cancel with %!cancel{key};
     %!cancel{key} := $*SCHEDULER.cue({ %!hash{key}:delete }, :in($timeout));
@@ -32,22 +34,29 @@ role Hash::Timeout:ver<0.0.1>:auth<cpan:FRITH>[$timeout = 3600] does Hash::Agnos
     for %!cancel.keys -> \k {
       .cancel with %!cancel{k}
     }
-    %!hash := {};
-    %!cancel := {};
+    %!hash = Hash.new;
+    %!cancel = Hash.new;
   }
   multi method STORE(::?ROLE:D: \values, :$initialize) {
     self.CLEAR;
-    self!STORE(values);
+    given values.WHAT {
+      when List { self!STOREL(values) }
+      when Hash { self!STOREH(values) }
+    }
     self;
   }
-  method !STORE(@values --> Int:D) {
+  method !STOREH(%hash --> Int:D) {
+    for %hash.kv -> \k, \v {
+      self.ASSIGN-KEY(k, v);
+    }
+  }
+  method !STOREL(@values --> Int:D) {
     my $last := Mu;
     my int $found;
 
     for @values {
       if $_ ~~ Pair {
-        %!cancel{.key} := $*SCHEDULER.cue({ %!hash{.key}:delete }, :in($timeout));
-        %!hash{.key} = .value;
+        self.ASSIGN-KEY(.key, .value);
         ++$found;
       } elsif $_ ~~ Failure {
         .throw
@@ -56,7 +65,7 @@ role Hash::Timeout:ver<0.0.1>:auth<cpan:FRITH>[$timeout = 3600] does Hash::Agnos
         ++$found;
         $last := Mu;
       } elsif $_ ~~ Map {
-        $found += self!STORE([.pairs])
+        $found += self!STOREL([.pairs])
       } else {
         $last := $_;
       }
