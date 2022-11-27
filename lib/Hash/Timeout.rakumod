@@ -1,8 +1,8 @@
-#!/usr/bin/env perl6
+#!/usr/bin/env raku
 
 use Hash::Agnostic;
 
-role Hash::Timeout:ver<0.0.1>:auth<cpan:FRITH>[$timeout = 3600] does Hash::Agnostic
+role Hash::Timeout:ver<0.0.1>:auth<zef:FRITH>[$timeout = 3600] does Hash::Agnostic
 {
   has %!hash;
   has %!cancel;

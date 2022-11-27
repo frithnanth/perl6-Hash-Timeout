@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/frithnanth/perl6-Hash-Timeout.svg?branch=master)](https://travis-ci.org/frithnanth/perl6-Hash-Timeout)
+[![Actions Status](https://github.com/frithnanth/perl6-Hash-Timeout/workflows/test/badge.svg)](https://github.com/frithnanth/perl6-Hash-Timeout/actions)
 
 NAME
 ====

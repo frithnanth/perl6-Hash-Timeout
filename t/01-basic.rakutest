@@ -1,4 +1,4 @@
-#!/usr/bin/env perl6
+#!/usr/bin/env raku
 
 use lib 'lib';
 use Test;
@@ -13,7 +13,7 @@ subtest {
   ok %h1.values ~~ (1, 2, 3).Set, '.values works';
   ok %h1.pairs ~~ (:1a, :2b, :3c).Set, '.pairs works';
   ok %h1.kv ~~ (1, 2, 3, 'a', 'b', 'c').Set, '.kv works';
-  is %h1.perl, 'Hash+{Hash::Timeout[Int]}.new(:a(1),:b(2),:c(3))', '.perl works';
+  is %h1.raku, 'Hash+{Hash::Timeout[Int]}.new(:a(1),:b(2),:c(3))', '.raku works';
 }, 'test basic methods after initialization';
 
 subtest {
