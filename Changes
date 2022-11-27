@@ -1,5 +1,7 @@
 Revision history for Hash-Timeout
 
 {{$NEXT}}
+
+0.0.2  2022-11-27T19:26:23+01:00
     - Use zef ecosystem
     - Use Github CI
